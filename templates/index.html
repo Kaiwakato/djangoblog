@@ -1,0 +1,20 @@
+{% extends "layout.html" %} {% block body %}
+<div class="jumbotron text-center">
+  <h3>Ömer Naz Bloğuna Hoşgeldiniz...</h3>
+  <p>
+    Bu blogta geliştiriciler olarak blog yazılarınızı paylaşabilirsiniz ve
+    insanlara yardımcı olabilirsiniz...
+  </p>
+</div>
+
+<h4>
+  <br />
+  <hr />
+
+  {% if request.user.is_authenticated %} {{request.user.username}}, Hesabı ile
+  Giriş Yaptınız {% else %} Misafir Modundasınız, Sağ Üst Taraftan Giriş
+  Yapabilirsiniz. Hesabınız Yoksa Kayıt Olabilirsiniz. {% endif %}
+  <hr />
+</h4>
+
+{% endblock body %}

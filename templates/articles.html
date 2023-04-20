@@ -1,0 +1,55 @@
+{% extends "layout.html" %} {% block body %}
+<h2>Makaleler</h2>
+<hr />
+<form>
+  {% csrf_token %} 
+ <input type="text" size = "138.75" name = "keyword" class="input-fs" maxlength="64" placeholder="Ara...">
+<button type="submit" class="btn btn-danger">Ara</button>
+</form>
+<br><br>
+{% if articles %} 
+{% for article in articles %}
+<div class="row">
+    <div class="col-lg-8">
+      <!-- Post content-->
+      <article>
+        <!-- Post header-->
+        <header class="mb-4">
+          <!-- Post title-->
+          <a href="{% url 'article:detail' article.id %}"><h4 class="fw-bolder mb-1">{{article.title}}</h4></a>  
+          <!-- Post categories-->
+          <p class="lead">
+            by
+            {{article.author.username}}
+          </p>
+          <hr>
+          <p>{{article.created_date}}</p>
+        </header>
+        <!-- Preview image figure -->
+        {% if article.article_image %}
+        <a href="{% url 'article:detail' article.id %}"><img
+            class="img-fluid rounded"
+            src="{{article.article_image.url}}"
+            alt="..."
+          /></a>  
+        
+        {% endif %}
+        
+        <hr>
+        <!-- Post content-->
+        <section class="mb-5">
+          <p class="lead">{{article.content|safe|truncatewords:35}}</p>
+          <a style = "float : right;"href="{% url 'article:detail' article.id %}" class="btn btn-primary">Devamını Oku</a>
+          <br>
+          <br>
+          <hr>
+        </section>
+      </article>
+      </section>
+    </div>
+<div>
+
+{% endfor %}
+{% else %}
+<div class="alert alert-danger">Makale Bulunamadı</div>
+{% endif %} {% endblock body %}
